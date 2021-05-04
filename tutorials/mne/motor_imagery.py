@@ -119,3 +119,4 @@ plt.ylabel('classification accuracy')
 plt.title('Classification score over time')
 plt.legend(loc='lower right')
 plt.show()
+# %%
