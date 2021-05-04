@@ -267,10 +267,12 @@ class EEGDataAdapter:
     data_mne_to_numpy_array = epochs.get_data()
     
     # Black magic (Reshaping numpy array obtained from MNE for our purposes)
+
     data = data_mne_to_numpy_array.transpose(1,0,2).flatten().reshape(data_mne_to_numpy_array.shape[1],-1)
     batch_with_same_label_length = data_mne_to_numpy_array.shape[2]
     labels = np.repeat(epochs.events[:, -1], batch_with_same_label_length)
     print("[INFO]: Acquired  Data and labels")
+
     return data, labels
 
 
