@@ -1,13 +1,6 @@
 from pathlib import Path
-import os
-import pyxdf
-import numpy as np
 import matplotlib.pyplot as plt
-from data.input_adapter import EEGDataAdapter
-from matplotlib import mlab
-import scipy.signal
-from numpy import linalg
-import matplotlib.pyplot as plt
+from input_adapter import EEGDataAdapter
 
 
 def get_project_root() -> Path:
@@ -18,6 +11,7 @@ class Visualizer:
     def __init__(self, file_name):
 
         self.data_dir = str(get_project_root()) + "/data" + file_name
+        self.eeg_data, self.eeg_labels = self.load_data()
 
     def load_data(self):
         loader = EEGDataAdapter('', channel_indices=[1, 2, 3, 4, 5, 6, 7, 8], mode='offline',
@@ -28,19 +22,19 @@ class Visualizer:
         eeg_data = eeg_data * 1e6  # scale for unicorn
         return eeg_data, eeg_labels
 
-    @staticmethod
-    def plot_data():
+    def plot_data(self):
         fig, axs = plt.subplots(9)
         fig.suptitle('EEG Channels')
         for i in range(8):
-            axs[i].plot(eeg_data[i])
-        axs[8].plot(eeg_labels)
+            axs[i].plot(self.eeg_data[i])
+        axs[8].plot(self.eeg_labels)
         fig.show()
+        return
 
 
 my_visualizer = Visualizer('/BF_MI_05')
-eeg_data, eeg_labels = my_visualizer.load_data()
 my_visualizer.plot_data()
+
 
 
 
