@@ -1,6 +1,6 @@
 from pathlib import Path
 import matplotlib.pyplot as plt
-from util.input_adapter import EEGDataAdapter
+from input_adapter import EEGDataAdapter
 
 
 def get_project_root() -> Path:
@@ -24,6 +24,7 @@ class Dataloader:
 
         eeg_data, eeg_labels = loader.load_recorded_eeg_data_file(self.data_dir, file_type='xdf')
         eeg_data = eeg_data * 1e6  # Scale for unicorn
+        print(eeg_data.size)
         return eeg_data, eeg_labels
 
     def get_data(self):
@@ -39,7 +40,7 @@ class Dataloader:
         return
 
 
-my_dataloader = Dataloader('/BF_MI_05')
+my_dataloader = Dataloader('/BF_MI_03')
 my_dataloader.plot_data()
 
 
