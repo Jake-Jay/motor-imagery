@@ -232,7 +232,7 @@ class WordCue:
 if __name__ == '__main__':
     '''
     Available stimuli:
-    
+
     ImageCue('handL'),
     ImageCue('handR'),
     ImageCue('foot'),
