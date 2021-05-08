@@ -189,25 +189,30 @@ class EEGDataAdapter:
     data : ndarray (n_channels, n_samples)
         The Data od Channels and EEG Samples as Numpy Array 
     lables : ndarray (n_samples,)
-        Vektor of Labels to the corresponding Data
+        Vector of Labels to the corresponding Data
     """
     self.file_type = file_type
     self.recording_paradigm = recording_paradigm
     self.event_dict == None
 
+    # Set up event dictionary based on the paradigm being used
     if recording_paradigm =='Graz':
-      print("[INFO]: The Paradigm followed is the Graz paradigm")
+      print("[INFO]: Loading Data recorded using the Graz paradigm")
       
       if self.event_dict == None:
-          print("went into none")
+          print("[WARNING]: Event dictionary has not been set. Setting to Graz paradigm defaults.")
           self.event_dict = {'noblink':0, 'break':1, 'imagery_handR':2, 'imagery_handL':3, 'imagery_foot':4, 'imagery_rotation':5 }
-    print(self.event_dict)
-    if recording_paradigm == 'SSVEP':
-        print("[INFO]: The Paradigm followed is the Graz paradigm")
+      
+      print(f'[INFO]: Event dictionary for the Graz paradigm is {self.event_dict}')
+    elif recording_paradigm == 'SSVEP':
+        print("[INFO]: The Paradigm followed is the SSVEP paradigm")
         if self.event_dict == None:
             print("went into none")
             self.event_dict = {'fs_5':0, 'fs_10':1, "fs_15":1}
+    else:
+      print(f'[WARNING]: You have not specified a paradigm. Your events are: {self.event_dict}')
 
+    # Load data from file
     if file_type=='edf':
       print("[INFO]: Opening a edf file")
       raw_data = read_raw_edf(file_name + "." + file_type, preload=True)
@@ -225,7 +230,6 @@ class EEGDataAdapter:
           print("[ERROR]: Invalid Device type, define Events")
           events_from_annotations(raw_data)
 
-      
     elif file_type=='gdf':
       print("[INFO]: Opening a gdf file")
       raw_data = read_raw_gdf(file_name + "." + file_type, preload=True)
@@ -250,13 +254,13 @@ class EEGDataAdapter:
           events_from_annotations(raw_data) 
       
     elif file_type=='xdf':
-      print("[INFO]: Opening an xdf file")
+      print("[INFO]: Opening xdf file")
       raw_data = self.read_raw_xdf(file_name + "." + file_type)
       event_strings = list(self.event_dict.keys())
-      event_strings = ['break', 'imagery_handL', 'imagery_handR']
-      self.select_events(selected_events=event_strings, raw_type='xdf')
       
+      # event_strings = ['break', 'imagery_handL', 'imagery_handR']
 
+      self.select_events(selected_events=event_strings, raw_type='xdf')
     else:
       print("[ERROR]: Invalid file type")
           

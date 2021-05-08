@@ -32,7 +32,11 @@ class Dataloader:
                                             }
                                 )
 
-        eeg_data, eeg_labels = loader.load_recorded_eeg_data_file(data_dir, file_type='xdf')
+        eeg_data, eeg_labels = loader.load_recorded_eeg_data_file(
+            data_dir, 
+            file_type='xdf',
+            recording_paradigm='Graz'
+        )
         eeg_data = eeg_data * 1e6  # Scale for unicorn
         return eeg_data, eeg_labels
 
