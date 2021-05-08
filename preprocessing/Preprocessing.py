@@ -126,8 +126,8 @@ class Preprocessing:
                 plt.title(chan_lab[i])
 
             plt.legend()
-            # plt.tight_layout()
-            plt.show()
+            plt.tight_layout()
+            # plt.show()
 
     def bandpass(self, trials, lo, hi, sample_rate):
         '''
