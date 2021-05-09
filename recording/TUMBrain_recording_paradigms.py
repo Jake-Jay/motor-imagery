@@ -139,10 +139,7 @@ class Paradigm:
     # four paradigms in a group
 
     def graz_experiment(self):
-        """
-        Run Graz Paradigm
-
-        """
+        """Run Graz Paradigm"""
 
         self.run_set([ImageCue('auditory'), ImageCue('foot'), SubstractionCue(), ImageCue('pause')], num_trials=2)
         self.run_set([ImageCue('handL'), ImageCue('foot'), SubstractionCue(), ImageCue('pause')], num_trials=2)
@@ -233,18 +230,6 @@ class WordCue:
 
 
 if __name__ == '__main__':
-    duration = {
-        'motor': 4,
-        'beep': 1,
-        'break': 4,
-        'cue': 2
-    }
-
-    stimuli = [
-        ImageCue('handL'),
-        ImageCue('handR')
-    ]
-
     '''
     Available stimuli:
 
@@ -260,9 +245,19 @@ if __name__ == '__main__':
     ImageCue('pause')
     '''
 
+    duration = {
+        'motor': 4,
+        'beep': 1,
+        'break': 4,
+        'cue': 2
+    }
+
+    stimuli = [
+        ImageCue('handL'),
+        ImageCue('handR')
+    ]
+
     mywin = visual.Window(units='height', fullscr=False)
     paradigm: Paradigm = Paradigm(mywin)
-    paradigm.run_set(stimuli, num_trials=15, repetition=20)
+    paradigm.run_set(stimuli, num_trials=10, repetition=4)
 
-    # 000: 3, 1
-    # 001:
