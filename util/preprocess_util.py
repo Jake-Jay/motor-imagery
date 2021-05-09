@@ -124,7 +124,7 @@ def bandpass(samples_buffer: np.ndarray, lf=4, hf=30, fs=250, ftype:str='fir'):
         b_bp = signal.firwin(
             21, 
             [lf, hf],
-            # [lf/(fs/2.0), hf/(fs/2.0)],
+            width=0.05, 
             fs=fs, 
             pass_zero='bandpass'
         )
