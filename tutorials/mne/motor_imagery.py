@@ -31,6 +31,7 @@ subject = 1
 runs = [6, 10, 14]  # motor imagery: hands vs feet
 
 raw_fnames = eegbci.load_data(subject, runs)
+
 raw = concatenate_raws([read_raw_edf(f, preload=True) for f in raw_fnames])
 eegbci.standardize(raw)  # set channel names
 montage = make_standard_montage('standard_1005')
