@@ -35,7 +35,7 @@ def psd(trials, nchannels, nsamples, fs):
 
 
 
-def plot_psd(trials_PSD, freqs, chan_ind, classes:list, chan_lab=None, maxy=None):
+def plot_psd(trials_PSD, freqs, chan_ind, chan_lab=None, maxy=None):
     '''
     Plots PSD data calculated with psd().
     
@@ -118,6 +118,8 @@ def plot_logvar(trials, nchannels, cl_labels):
         trials - Dictionary containing the trials (log-vars x trials) for 2 classes.
     '''
     plt.figure(figsize=(12,5))
+
+    nchannels = trials[cl_labels[0]].shape[0]
     
     x0 = np.arange(nchannels)
     x1 = np.arange(nchannels) + 0.4
@@ -137,10 +139,10 @@ def plot_logvar(trials, nchannels, cl_labels):
     plt.legend(cl_labels)
 
 # Scatter plot
-def plot_scatter(left, foot, cl_lab):
+def plot_scatter(cl0, cl1, cl_lab):
     plt.figure()
-    plt.scatter(left[0,:], left[-1,:], color='b')
-    plt.scatter(foot[0,:], foot[-1,:], color='r')
+    plt.scatter(cl0[0,:], cl0[-1,:], color='b')
+    plt.scatter(cl1[0,:], cl1[-1,:], color='r')
     plt.xlabel('Last component')
     plt.ylabel('First component')
     plt.legend(cl_lab)
