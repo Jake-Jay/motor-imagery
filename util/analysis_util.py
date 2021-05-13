@@ -34,6 +34,47 @@ def psd(trials, nchannels, nsamples, fs):
     return trials_PSD, freqs
 
 
+def bandpower(trials, fs, band=[8,16]):
+    nchannels, nsamples, ntrials = trials.shape
+    bandpower = np.zeros((nchannels, ntrials)) 
+
+    # Iterate over trials and channels
+    for trial in range(ntrials):
+        for ch in range(nchannels):
+            # Calculate the PSD
+            (PSD, freqs) = mlab.psd(trials[ch,:,trial], NFFT=int(nsamples), Fs=fs)        
+            idxs = np.where(np.logical_and(freqs > band[0], freqs < band[1]))
+            freqs = freqs[idxs]
+            bandpower[ch, trial] = PSD[idxs].mean()
+    
+    return freqs, bandpower
+
+def plot_bandpower(trials, classes):
+    '''
+    Plots the log-var of each channel/component.
+    arguments:
+        trials - Dictionary containing the trials (log-vars x trials) for 2 classes.
+    '''
+    plt.figure(figsize=(12,5))
+
+    nchannels = trials[classes[0]].shape[0]
+    
+    x0 = np.arange(nchannels)
+    x1 = np.arange(nchannels) + 0.4
+
+    y0 = np.mean(trials[classes[0]], axis=1)
+    y1 = np.mean(trials[classes[1]], axis=1)
+
+    plt.bar(x0, y0, width=0.5, color='b')
+    plt.bar(x1, y1, width=0.4, color='r')
+
+    plt.xlim(-0.5, nchannels+0.5)
+
+    plt.gca().yaxis.grid(True)
+    plt.title('Bandpower of each channel')
+    plt.xlabel('channels')
+    plt.ylabel('bandpower')
+    plt.legend(classes)
 
 def plot_psd(trials_PSD, freqs, chan_ind, chan_lab=None, maxy=None):
     '''
@@ -93,7 +134,6 @@ def plot_psd(trials_PSD, freqs, chan_ind, chan_lab=None, maxy=None):
         
     plt.tight_layout()
 
-
 # Calculate the log(var) of the trials
 def logvar(trials):
     '''
@@ -111,7 +151,7 @@ def logvar(trials):
     '''
     return np.log(np.var(trials, axis=1))
 
-def plot_logvar(trials, nchannels, cl_labels):
+def plot_logvar(trials, classes):
     '''
     Plots the log-var of each channel/component.
     arguments:
@@ -119,13 +159,13 @@ def plot_logvar(trials, nchannels, cl_labels):
     '''
     plt.figure(figsize=(12,5))
 
-    nchannels = trials[cl_labels[0]].shape[0]
+    nchannels = trials[classes[0]].shape[0]
     
     x0 = np.arange(nchannels)
     x1 = np.arange(nchannels) + 0.4
 
-    y0 = np.mean(trials[cl_labels[0]], axis=1)
-    y1 = np.mean(trials[cl_labels[1]], axis=1)
+    y0 = np.mean(trials[classes[0]], axis=1)
+    y1 = np.mean(trials[classes[1]], axis=1)
 
     plt.bar(x0, y0, width=0.5, color='b')
     plt.bar(x1, y1, width=0.4, color='r')
@@ -136,7 +176,7 @@ def plot_logvar(trials, nchannels, cl_labels):
     plt.title('log-var of each channel/component')
     plt.xlabel('channels/components')
     plt.ylabel('log-var')
-    plt.legend(cl_labels)
+    plt.legend(classes)
 
 # Scatter plot
 def plot_scatter(cl0, cl1, cl_lab):
