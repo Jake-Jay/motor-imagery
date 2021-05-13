@@ -111,7 +111,7 @@ def logvar(trials):
     '''
     return np.log(np.var(trials, axis=1))
 
-def plot_logvar(trials, nchannels, cl_labels):
+def plot_logvar(trials, classes):
     '''
     Plots the log-var of each channel/component.
     arguments:
@@ -119,13 +119,13 @@ def plot_logvar(trials, nchannels, cl_labels):
     '''
     plt.figure(figsize=(12,5))
 
-    nchannels = trials[cl_labels[0]].shape[0]
+    nchannels = trials[classes[0]].shape[0]
     
     x0 = np.arange(nchannels)
     x1 = np.arange(nchannels) + 0.4
 
-    y0 = np.mean(trials[cl_labels[0]], axis=1)
-    y1 = np.mean(trials[cl_labels[1]], axis=1)
+    y0 = np.mean(trials[classes[0]], axis=1)
+    y1 = np.mean(trials[classes[1]], axis=1)
 
     plt.bar(x0, y0, width=0.5, color='b')
     plt.bar(x1, y1, width=0.4, color='r')
@@ -136,7 +136,7 @@ def plot_logvar(trials, nchannels, cl_labels):
     plt.title('log-var of each channel/component')
     plt.xlabel('channels/components')
     plt.ylabel('log-var')
-    plt.legend(cl_labels)
+    plt.legend(classes)
 
 # Scatter plot
 def plot_scatter(cl0, cl1, cl_lab):

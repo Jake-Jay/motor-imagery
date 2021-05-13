@@ -174,12 +174,6 @@ def notch(samples_buffer:np.ndarray, notch_f:int=50, Q:int=30, fs:int=250):
     # plt.show()
     return samples_buffer
 
-def visualise_filter(filter_params, fs:int):
-    w1, h1 = signal.freqz(b_bp, fs=fs)
-    plt.plot(w1, 20*np.log10(np.abs(h1)), 'b')
-
-    plt.show()
-
 
 # -----------------------------------------------------------------------
 # Channels by name or by channel number
@@ -226,19 +220,19 @@ def get_channel(channel_name:str, eeg_data):
 # -----------------------------------------------------------------------
 class CSP:
 
-    def __init__(self, trials, cl_labs, nsamples, nchannels, W=None) -> None:
+    def __init__(self, trials, classes, nsamples, nchannels, W=None) -> None:
         self.nsamples = nsamples
         self.nchannels = nchannels
         self.trials = trials
 
         if W is None:
-            self.W = self.csp(trials[cl_labs[0]], trials[cl_labs[1]])
+            self.W = self.csp(trials[classes[0]], trials[classes[1]])
         else:
             self.W = W
 
         self.trials_csp = {
-            cl_labs[0]: self.apply_mix(self.W, self.trials[cl_labs[0]]),
-            cl_labs[1]: self.apply_mix(self.W, self.trials[cl_labs[1]])
+            classes[0]: self.apply_mix(self.W, self.trials[classes[0]]),
+            classes[1]: self.apply_mix(self.W, self.trials[classes[1]])
         }
 
     def get_csp_trials(self):
