@@ -1,6 +1,118 @@
 import matplotlib.pyplot as plt
 import util.preprocess_util as preprocess
 import matplotlib.transforms as mtransforms
+import numpy as np
+
+
+def print_results(classes, accuracies:list, confusion_matrices:list, format=None):
+    nfolds = len(accuracies)
+
+    if format is None:
+        print('{}\tTrue {}\tFalse {}\tFalse {}\tTrue {}\n{}'.format(
+        'Accuracy', 
+        classes[0], 
+        classes[0],
+        classes[1], 
+        classes[1],
+        '-'*110
+        ))
+
+        av_acc = 0
+        av_conf = np.zeros([2,2])
+        for i in range(nfolds):
+            print('{:.2f}\t\t\t{}\t\t\t{}\t\t\t{}\t\t\t{}'.format(
+                accuracies[i],
+                confusion_matrices[i][0,0],
+                confusion_matrices[i][0,1],
+                confusion_matrices[i][1,0],
+                confusion_matrices[i][1,1])
+            )
+            av_acc += accuracies[i]
+            av_conf += confusion_matrices[i]
+
+        av_acc /= nfolds
+        av_conf = av_conf/nfolds
+        print('{}\n{:.2f}\t\t\t{}\t\t\t{}\t\t\t{}\t\t\t{}\n{}'.format(
+            '-'*110,
+            av_acc,
+            av_conf[0,0],
+            av_conf[0,1],
+            av_conf[1,0],
+            av_conf[1,1],
+            '-'*110
+        ))
+    
+    elif format=='tex':
+        print('&{}\t& True {}\t& False {}\t& False {}\t& True {} {}'.format(
+            'Accuracy', 
+            classes[0], 
+            classes[0],
+            classes[1], 
+            classes[1],
+            r'\\'
+        ))
+
+        av_acc = 0
+        av_conf = np.zeros([2,2])
+        for i in range(nfolds):
+            print('Fold {} & {:.2f}\t\t& {}\t\t& {}\t\t& {}\t\t& {} {}'.format(
+                i,
+                accuracies[i],
+                confusion_matrices[i][0,0],
+                confusion_matrices[i][0,1],
+                confusion_matrices[i][1,0],
+                confusion_matrices[i][1,1],
+                r'\\'
+            ))
+            av_acc += accuracies[i]
+            av_conf += confusion_matrices[i]
+
+        av_acc /= nfolds
+        av_conf = av_conf/nfolds
+        print('Average &{:.2f}\t\t& {}\t\t& {}\t\t& {}\t\t& {} {}'.format(
+            av_acc,
+            av_conf[0,0],
+            av_conf[0,1],
+            av_conf[1,0],
+            av_conf[1,1],
+            r'\\'
+        ))
+    
+    elif format == 'md':
+        print('Fold |{}\t| True {}\t| False {}\t| False {}\t| True {} |'.format(
+            'Accuracy', 
+            classes[0], 
+            classes[0],
+            classes[1], 
+            classes[1]
+        ))
+        print('--- |'*6)
+
+        av_acc = 0
+        av_conf = np.zeros([2,2])
+        for i in range(nfolds):
+            print('Fold {} | {:.2f}\t\t| {}\t\t| {}\t\t| {}\t\t| {} |'.format(
+                i,
+                accuracies[i],
+                confusion_matrices[i][0,0],
+                confusion_matrices[i][0,1],
+                confusion_matrices[i][1,0],
+                confusion_matrices[i][1,1],
+            ))
+            av_acc += accuracies[i]
+            av_conf += confusion_matrices[i]
+
+        av_acc /= nfolds
+        av_conf = av_conf/nfolds
+        print('Average |{:.2f}\t\t| {}\t\t| {}\t\t| {}\t\t| {} |'.format(
+            av_acc,
+            av_conf[0,0],
+            av_conf[0,1],
+            av_conf[1,0],
+            av_conf[1,1],
+        ))
+
+
 
 
 def plot_events(
