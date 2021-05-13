@@ -259,5 +259,5 @@ if __name__ == '__main__':
 
     mywin = visual.Window(units='height', fullscr=False)
     paradigm: Paradigm = Paradigm(mywin)
-    paradigm.run_set(stimuli, num_trials=10, repetition=4)
+    paradigm.run_set(stimuli, num_trials=20, repetition=15)
 
