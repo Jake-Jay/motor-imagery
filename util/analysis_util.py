@@ -51,28 +51,26 @@ def bandpower(trials, fs, band=[8,16]):
 
 def plot_bandpower(trials, classes):
     '''
-    Plots the log-var of each channel/component.
+    Plots the bandpower of each channel/component.
     arguments:
         trials - Dictionary containing the trials (log-vars x trials) for 2 classes.
     '''
     plt.figure(figsize=(12,5))
 
     nchannels = trials[classes[0]].shape[0]
-    
-    x0 = np.arange(nchannels)
-    x1 = np.arange(nchannels) + 0.4
 
-    y0 = np.mean(trials[classes[0]], axis=1)
-    y1 = np.mean(trials[classes[1]], axis=1)
+    for i in range(len(classes)):
 
-    plt.bar(x0, y0, width=0.5, color='b')
-    plt.bar(x1, y1, width=0.4, color='r')
+        x = np.arange(nchannels) + 0.2 * i
+        y = np.mean(trials[classes[i]], axis=1)
+        plt.bar(x, y, width=0.2)
 
     plt.xlim(-0.5, nchannels+0.5)
 
     plt.gca().yaxis.grid(True)
     plt.title('Bandpower of each channel')
     plt.xlabel('channels')
+    plt.xticks(x, ['Fz', 'C3', 'Cz', 'C4', 'Pz', 'PO7', 'Oz', 'PO8'])
     plt.ylabel('bandpower')
     plt.legend(classes)
 
