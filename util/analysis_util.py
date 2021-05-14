@@ -65,10 +65,76 @@ def plot_bandpower(trials, classes):
     y0 = np.mean(trials[classes[0]], axis=1)
     y1 = np.mean(trials[classes[1]], axis=1)
 
-    plt.bar(x0, y0, width=0.5, color='b')
-    plt.bar(x1, y1, width=0.4, color='r')
+    if(classes[0] == 'imagery_handL'):
+        plt.bar(x0, y0, width=0.5, color='b')
+        plt.bar(x1, y1, width=0.4, color='r')
+    else:
+        plt.bar(x0, y0, width=0.5, color='green')
+        plt.bar(x1, y1, width=0.4, color='orange')
 
     plt.xlim(-0.5, nchannels+0.5)
+
+    plt.gca().yaxis.grid(True)
+    plt.title('Bandpower of each channel')
+    plt.xlabel('channels')
+    plt.ylabel('bandpower')
+    plt.legend(classes)
+
+
+def plot_bandpower_mi_idle(trials, classes):
+    '''
+    Plots the log-var of each channel/component.
+    arguments:
+        trials - Dictionary containing the trials (log-vars x trials) for 2 classes.
+    '''
+    plt.figure(figsize=(12, 5))
+
+    nchannels = trials[classes[0]].shape[0]
+
+    x0 = np.arange(nchannels)
+    x1 = np.arange(nchannels) + 0.4
+
+    y0 = np.mean(trials[classes[2]], axis=1)
+    y1 = np.mean(trials[classes[3]], axis=1)
+
+    plt.bar(x0, y0, width=0.5, color='green')
+    plt.bar(x1, y1, width=0.4, color='orange')
+
+    plt.xlim(-0.5, nchannels + 0.5)
+
+    plt.gca().yaxis.grid(True)
+    plt.title('Bandpower of each channel')
+    plt.xlabel('channels')
+    plt.ylabel('bandpower')
+    plt.legend(classes[2:4])
+
+
+def plot_bandpower_all_classes(trials, classes):
+    '''
+    Plots the log-var of each channel/component.
+    arguments:
+        trials - Dictionary containing the trials (log-vars x trials) for 2 classes.
+    '''
+    plt.figure(figsize=(15, 5))
+
+    nchannels = trials[classes[0]].shape[0]
+
+    x0 = np.arange(nchannels)
+    x1 = np.arange(nchannels) + 0.2
+    x2 = np.arange(nchannels) + 0.4
+    x3 = np.arange(nchannels) + 0.6
+
+    y0 = np.mean(trials[classes[0]], axis=1)
+    y1 = np.mean(trials[classes[1]], axis=1)
+    y2 = np.mean(trials[classes[2]], axis=1)
+    y3 = np.mean(trials[classes[3]], axis=1)
+
+    plt.bar(x0, y0, width=0.1, color='b')
+    plt.bar(x1, y1, width=0.1, color='r')
+    plt.bar(x2, y2, width=0.1, color='green')
+    plt.bar(x3, y3, width=0.1, color='orange')
+
+    plt.xlim(-0.5, nchannels + 0.5)
 
     plt.gca().yaxis.grid(True)
     plt.title('Bandpower of each channel')
@@ -167,10 +233,76 @@ def plot_logvar(trials, classes):
     y0 = np.mean(trials[classes[0]], axis=1)
     y1 = np.mean(trials[classes[1]], axis=1)
 
-    plt.bar(x0, y0, width=0.5, color='b')
-    plt.bar(x1, y1, width=0.4, color='r')
+    if(classes[0] == 'imagery_handL'):
+        plt.bar(x0, y0, width=0.5, color='b')
+        plt.bar(x1, y1, width=0.4, color='r')
+    else:
+        plt.bar(x0, y0, width=0.5, color='green')
+        plt.bar(x1, y1, width=0.4, color='orange')
 
     plt.xlim(-0.5, nchannels+0.5)
+
+    plt.gca().yaxis.grid(True)
+    plt.title('log-var of each channel/component')
+    plt.xlabel('channels/components')
+    plt.ylabel('log-var')
+    plt.legend(classes)
+
+
+def plot_logvar_idle_mi(trials, classes):
+    '''
+    Plots the log-var of each channel/component.
+    arguments:
+        trials - Dictionary containing the trials (log-vars x trials) for 2 classes.
+    '''
+    plt.figure(figsize=(12, 5))
+
+    nchannels = trials[classes[0]].shape[0]
+
+    x0 = np.arange(nchannels)
+    x1 = np.arange(nchannels) + 0.4
+
+    y0 = np.mean(trials[classes[2]], axis=1)
+    y1 = np.mean(trials[classes[3]], axis=1)
+
+    plt.bar(x0, y0, width=0.5, color='green')
+    plt.bar(x1, y1, width=0.4, color='orange')
+
+    plt.xlim(-0.5, nchannels + 0.5)
+
+    plt.gca().yaxis.grid(True)
+    plt.title('log-var of each channel/component')
+    plt.xlabel('channels/components')
+    plt.ylabel('log-var')
+    plt.legend(classes[2:4])
+
+def plot_logvar_all_classes(trials, classes):
+    '''
+    Plots the log-var of each channel/component.
+    arguments:
+        trials - Dictionary containing the trials (log-vars x trials) for 2 classes.
+    '''
+    plt.figure(figsize=(15, 5))
+
+    nchannels = trials[classes[0]].shape[0]
+
+    x0 = np.arange(nchannels)
+    x1 = np.arange(nchannels) + 0.2
+    x2 = np.arange(nchannels) + 0.4
+    x3 = np.arange(nchannels) + 0.6
+
+    y0 = np.mean(trials[classes[0]], axis=1)
+    y1 = np.mean(trials[classes[1]], axis=1)
+    y2 = np.mean(trials[classes[2]], axis=1)
+    y3 = np.mean(trials[classes[3]], axis=1)
+
+    plt.bar(x0, y0, width=0.1, color='b')
+    plt.bar(x1, y1, width=0.1, color='r')
+    plt.bar(x2, y2, width=0.1, color='green')
+    plt.bar(x3, y3, width=0.1, color='orange')
+
+
+    plt.xlim(-0.5, nchannels + 0.5)
 
     plt.gca().yaxis.grid(True)
     plt.title('log-var of each channel/component')
