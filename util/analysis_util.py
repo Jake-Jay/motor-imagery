@@ -49,32 +49,37 @@ def bandpower(trials, fs, band=[8,16]):
     
     return freqs, bandpower
 
-def plot_bandpower(trials, classes):
+def plot_bandpower(trials, classes, title=None, pretty_labels=None):
     '''
     Plots the bandpower of each channel/component.
     arguments:
         trials - Dictionary containing the trials (log-vars x trials) for 2 classes.
     '''
-    plt.figure(figsize=(12,5))
+    if title is None:
+        title = 'Bandpower of each channel'
+    if pretty_labels is None:
+        pretty_labels = classes
+
+    plt.figure(figsize=(9,5))
 
     nchannels = trials[classes[0]].shape[0]
 
     for i in range(len(classes)):
-
+        color_variant = i/len(classes)
         x = np.arange(nchannels) + 0.2 * i
         y = np.mean(trials[classes[i]], axis=1)
-        plt.bar(x, y, width=0.2)
+        plt.bar(x, y, width=0.2, color=(color_variant,0.1,0.4,1))
 
     plt.xlim(-0.5, nchannels+0.5)
 
     plt.gca().yaxis.grid(True)
-    plt.title('Bandpower of each channel')
-    plt.xlabel('channels')
-    plt.xticks(x, ['Fz', 'C3', 'Cz', 'C4', 'Pz', 'PO7', 'Oz', 'PO8'])
-    plt.ylabel('bandpower')
-    plt.legend(classes)
+    plt.title(title)
+    plt.xlabel('EEG Channels')
+    plt.xticks(np.arange(nchannels), ['Fz', 'C3', 'Cz', 'C4', 'Pz', 'PO7', 'Oz', 'PO8'])
+    plt.ylabel('Bandpower')
+    plt.legend(pretty_labels, loc='upper right', bbox_to_anchor=(1.05, 1.2), shadow=True, fancybox=True)
 
-def plot_psd(trials_PSD, freqs, chan_ind, chan_lab=None, maxy=None):
+def plot_psd(trials_PSD, freqs, chan_ind, chan_lab=None, maxy=None, pretty_labels=None):
     '''
     Plots PSD data calculated with psd().
     
@@ -94,6 +99,12 @@ def plot_psd(trials_PSD, freqs, chan_ind, chan_lab=None, maxy=None):
     plt.figure(figsize=(12,5))
     
     nchans = len(chan_ind)
+
+    if pretty_labels is None:
+        labels = list(trials_PSD.keys())
+    else:
+        labels = pretty_labels
+
     
     # Maximum of 3 plots per row
     nrows = int(np.ceil(nchans / 3))
@@ -105,14 +116,16 @@ def plot_psd(trials_PSD, freqs, chan_ind, chan_lab=None, maxy=None):
         ax = plt.subplot(nrows,ncols,i+1)
     
         # Plot the PSD for each class
-        for cl in trials_PSD.keys():
-            plt.plot(freqs, np.mean(trials_PSD[cl][ch,:,:], axis=1), label=cl)
+        for j, cl in enumerate(trials_PSD.keys()):
+            
+            label = labels[j]
+            plt.plot(freqs, np.mean(trials_PSD[cl][ch,:,:], axis=1), label=label)
     
         # All plot decoration below...
 
         trans = mtransforms.blended_transform_factory(ax.transData, ax.transAxes)
         ax.fill_between(freqs, 0, 1, where=np.logical_and(freqs > 8, freqs < 16),
-                facecolor='green', alpha=0.2, transform=trans, label='Alpha Band')
+                facecolor='green', alpha=0.2, transform=trans, label=r'$\alpha$ Band')
 
         plt.xlim(1,30)
         
@@ -128,7 +141,7 @@ def plot_psd(trials_PSD, freqs, chan_ind, chan_lab=None, maxy=None):
         else:
             plt.title(chan_lab[i])
 
-        plt.legend()
+    plt.legend(loc='upper right', bbox_to_anchor=(1.05, 1.05), shadow=True, fancybox=True)
         
     plt.tight_layout()
 
@@ -149,7 +162,7 @@ def logvar(trials):
     '''
     return np.log(np.var(trials, axis=1))
 
-def plot_logvar(trials, classes):
+def plot_logvar(trials, classes, title=None, xticks=None, data_type=None, pretty_labels=None):
     '''
     Plots the log-var of each channel/component.
     arguments:
@@ -171,9 +184,18 @@ def plot_logvar(trials, classes):
     plt.xlim(-0.5, nchannels+0.5)
 
     plt.gca().yaxis.grid(True)
-    plt.title('log-var of each channel/component')
-    plt.xlabel('channels/components')
+    if title is None:
+        title = 'log-var of each channel/component'
+    plt.title(title)
+    if data_type == 'EEG':
+        plt.xlabel('Channels')
+        plt.xticks(x0, ['Fz', 'C3', 'Cz', 'C4', 'Pz', 'PO7', 'Oz', 'PO8'])
+    else:
+        plt.xlabel('Components')
     plt.ylabel('log-var')
+
+    if pretty_labels is not None:
+        classes = pretty_labels
     plt.legend(classes)
 
 # Scatter plot

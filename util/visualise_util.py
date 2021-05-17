@@ -127,7 +127,7 @@ def plot_events(
     x = relative_eeg_timestamps[start_time*fs:(start_time + window)*fs]
     y = event_time_series[start_time*fs:(start_time + window)*fs]
 
-    fig, ax = plt.subplots(figsize=(10,5))
+    fig, ax = plt.subplots(figsize=(6,5))
     ax.plot(x, y)
 
     trans = mtransforms.blended_transform_factory(ax.transData, ax.transAxes)
@@ -138,6 +138,7 @@ def plot_events(
                     facecolor='orange', alpha=0.5, transform=trans, label='Left Hand')
 
     event_labels = list(label2code.keys())
+    plt.xlabel('Seconds')
     plt.yticks(range(len(event_labels)), event_labels)
     plt.ylim([2.8,7.2])
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.05), shadow=True, fancybox=True)
@@ -164,7 +165,7 @@ def plot_all(
 
     fig, axs = plt.subplots(
         number_of_channels+1, 1,
-        figsize=(10,8), 
+        figsize=(6,10), 
         sharex=True, 
         gridspec_kw={'height_ratios': height_ratios}
     )

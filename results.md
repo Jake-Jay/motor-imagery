@@ -83,7 +83,7 @@ Fold 4 | 0.75		| 22		| 4		| 15		| 34 |
 
 
 ---
-## Exp04: Using Bandpower
+
 - normalised
 - rereferenced
 - 2 CSP features
@@ -123,9 +123,6 @@ Fold 4 | 0.80		| 29		| 7		| 8		| 31 |
 [0, 1, 2, 3, 4, 5, 6, 7] [8, 16]
 {'imagery_handL': 0.35135135135135137, 'imagery_handR': 0.5052631578947369, 'idle': 0.6388888888888888}
 
-[0, 1, 2, 3, 4, 5, 6, 7] [8, 16]
-{'imagery_handL': 0.35135135135135137, 'imagery_handR': 0.5052631578947369, 'idle': 0.6388888888888888}
-
 
 ## Exp06: 2 class bandpower classifier (LDA)
 
@@ -149,3 +146,8 @@ Fold 4 | 0.80		| 29		| 7		| 8		| 31 |
 [0, 1, 2, 3, 4, 5, 6, 7] [8, 16]
 {'imagery_handL': 0.3783783783783784, 'imagery_handR': 0.6736842105263158}
 
+
+## Exp07: bandpower 2 stage
+<!-- accuracies are P(idle predicted | idle) -->
+[1, 3, 4, 5, 6, 7] [8, 16]
+{'imagery_handL': 0.24324324324324328, 'imagery_handR': 0.4000000000000001, 'idle': 0.6947368421052632}
