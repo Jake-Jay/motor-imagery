@@ -14,8 +14,9 @@ Compare the classification accuracy between:
     - Stage 2 classes: ['right', 'left']
 
 ## Data
-Find freely available datasets [here](http://bnci-horizon-2020.eu/database/data-sets)
-Our own data recordings are in the 'data' folder.
+Find freely available datasets [here](http://bnci-horizon-2020.eu/database/data-sets).
+
+Our own data recordings are in the 'data' folder. For all recordings the Graz recording paradigm was used. Data was recorded using an eight electrode Unicorn BCI device. The different classes are explained during the preprocessing sections in the various Jupyter Notebooks.
 
 ## Contributors
 - Sanda Heshan Lin (TUM)
