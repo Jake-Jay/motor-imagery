@@ -13,10 +13,13 @@ Compare the classification accuracy between:
     - Stage 1 classes: ['idle', 'not idle']
     - Stage 2 classes: ['right', 'left']
 
-## Data
-Find freely available datasets [here](http://bnci-horizon-2020.eu/database/data-sets).
+## Offline pipeline versions
+During the hackathon and the subsequent weeks we tried several combinations of preprocessing steps, feature extraction methods and classifiers. This repository evaluates their accuracy and false positive rates in several Jupyter Notebooks.
 
+## Data
 Our own data recordings are in the 'data' folder. For all recordings the Graz recording paradigm was used. Data was recorded using an eight electrode Unicorn BCI device. The different classes are explained during the preprocessing sections in the various Jupyter Notebooks.
+
+Further freely available datasets can be found [here](http://bnci-horizon-2020.eu/database/data-sets).
 
 ## Contributors
 - Sanda Heshan Lin (TUM)
