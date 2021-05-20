@@ -13,7 +13,7 @@ Compare the classification accuracy between:
     - Stage 1 classes: ['idle', 'not idle']
     - Stage 2 classes: ['right', 'left']
 
-## Offline pipeline versions
+## Different offline pipelines
 During the hackathon and the subsequent weeks we tried several combinations of preprocessing steps, feature extraction methods and classifiers. This repository evaluates their accuracy and false positive rates in several Jupyter Notebooks.
 
 ## Data
