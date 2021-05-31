@@ -17,6 +17,10 @@ Compare the classification accuracy between:
 During the hackathon and the subsequent weeks we tried several combinations of preprocessing steps, feature extraction methods and classifiers. This repository evaluates their accuracy and false positive rates in several Jupyter Notebooks.
 All pipeline experiments were merged into the master with two exceptions. The code for the Two-stage three-class classifier and the binary Idle-MI classifiers can be found in separate branches.
 
+![]('./figures/cross-validation-plot.png')
+
+![]('./figures/standard-preprocessing-pipeline.png')
+
 ## Data
 Our own data recordings are in the 'data' folder. For all recordings the Graz recording paradigm was used. Data was recorded using an eight electrode Unicorn BCI device. The different classes are explained during the preprocessing sections in the various Jupyter Notebooks.
 
@@ -26,6 +30,3 @@ Further freely available datasets can be found [here](http://bnci-horizon-2020.e
 - Sanda Heshan Lin (TUM)
 - Bertram Fuchs (TUM)
 - Jake Pencharz (TUM)
-
-
-
