@@ -27,7 +27,6 @@ Our results can be found in the results.md file. The figure below illustrates an
 ![](https://github.com/Jake-Jay/motor-imagery/blob/master/figures/cross-validation-plot.png?raw=true)
 
 
-
 ## Data
 Our own data recordings are in the 'data' folder. For all recordings the Graz recording paradigm was used. Data was recorded using an eight electrode Unicorn BCI device. The different classes are explained during the preprocessing sections in the various Jupyter Notebooks.
 
