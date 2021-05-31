@@ -140,12 +140,12 @@ Fold 4 | 0.80		| 29		| 7		| 8		| 31 |
 {'idle': 0.6736842105263158, 'mi': 0.6613333333333333}
 
 ### Left vs Right
-[0, 1, 2, 3, 4, 5, 6, 7] [10, 13]
-{'imagery_handL': 0.4594594594594595, 'imagery_handR': 0.6947368421052631}
 
 [0, 1, 2, 3, 4, 5, 6, 7] [8, 16]
 {'imagery_handL': 0.3783783783783784, 'imagery_handR': 0.6736842105263158}
 
+[0, 1, 2, 3, 4, 5, 6, 7] [10, 13]
+{'imagery_handL': 0.4594594594594595, 'imagery_handR': 0.6947368421052631}
 
 ## Exp07: bandpower 2 stage
 <!-- accuracies are P(idle predicted | idle) -->

@@ -23,8 +23,8 @@ def print_results(classes, accuracies:list, confusion_matrices:list, format=None
             print('{:.2f}\t\t\t{}\t\t\t{}\t\t\t{}\t\t\t{}'.format(
                 accuracies[i],
                 confusion_matrices[i][0,0],
-                confusion_matrices[i][0,1],
                 confusion_matrices[i][1,0],
+                confusion_matrices[i][0,1],
                 confusion_matrices[i][1,1])
             )
             av_acc += accuracies[i]
@@ -111,7 +111,6 @@ def print_results(classes, accuracies:list, confusion_matrices:list, format=None
             av_conf[1,0],
             av_conf[1,1],
         ))
-
 
 
 
