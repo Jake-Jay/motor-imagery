@@ -18,6 +18,7 @@ During the hackathon and the subsequent weeks we tried several combinations of p
 All pipeline experiments were merged into the master with two exceptions. The code for the Two-stage three-class classifier and the binary Idle-MI classifiers can be found in separate branches.
 
 ![]('./figures/cross-validation-plot.png')
+![](https://github.com/Jake-Jay/motor-imagery/blob/master/figures/cross-validation-plot.png?raw=true)
 
 ![]('./figures/standard-preprocessing-pipeline.png')
 
