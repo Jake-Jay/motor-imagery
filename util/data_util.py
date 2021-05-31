@@ -1,5 +1,6 @@
 import pyxdf
 import numpy as np
+import pdb
 
 
 class EEG_Dataset():
@@ -107,23 +108,20 @@ def get_trials(eeg_data, event_time_series, class_labels, nsamples:list, label2c
 
     # Dictionary to store the trials in, each class gets an entry
     trials = {}
-    markers = {}
     nchannels = eeg_data.shape[0]
 
     for cl_lab, nsamples in zip(class_labels, nsamples):
         event_onset_mask =  np.roll(event_time_series,1)!=event_time_series
         class_onset_mask = event_time_series == label2code[cl_lab]
-        class_onset_indices = np.where(np.logical_and(
-                                    event_onset_mask, class_onset_mask))[0]
-        
+        class_onset_indices = np.where(
+            np.logical_and(event_onset_mask, class_onset_mask))[0]
+
         # Allocate memory for the trials
         trials[cl_lab] = np.zeros((nchannels, nsamples, len(class_onset_indices)))
-        markers[cl_lab] = np.zeros((nsamples, len(class_onset_indices)))
 
         # Extract each trial
         for i, onset in enumerate(class_onset_indices):
             trials[cl_lab][:,:,i] = eeg_data[:, onset:onset+nsamples]
-            markers[cl_lab][:, i] = event_time_series[onset:onset+nsamples]
     
     return trials
 
