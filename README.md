@@ -15,6 +15,7 @@ Compare the classification accuracy between:
 
 ## Different offline pipelines
 During the hackathon and the subsequent weeks we tried several combinations of preprocessing steps, feature extraction methods and classifiers. This repository evaluates their accuracy and false positive rates in several Jupyter Notebooks.
+All pipeline experiments were merged into the master with two exceptions. The code for the Two-stage three-class classifier and the binary Idle-MI classifiers can be found in separate branches.
 
 ## Data
 Our own data recordings are in the 'data' folder. For all recordings the Graz recording paradigm was used. Data was recorded using an eight electrode Unicorn BCI device. The different classes are explained during the preprocessing sections in the various Jupyter Notebooks.
